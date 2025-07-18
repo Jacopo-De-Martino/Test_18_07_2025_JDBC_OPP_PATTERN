@@ -1,0 +1,2 @@
+# Test_18_07_2025_JDBC_OPP_PATTERN
+Esercizi chiusura settimana
