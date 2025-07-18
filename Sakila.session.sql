@@ -1,10 +1,12 @@
+-- Query 1: Seleziona tutti i film rilasciati dopo il 2005, ordinati per titolo in ordine alfabetico.
 SELECT title,
-    release_year -- query che restituisci un ResultSet titolo e data di rilascio di tutti i film usciti dopo il 2005
+    release_year
 FROM film
 WHERE release_year > 2005
 ORDER BY title ASC;
-SELECT -- query he mestra l'id noleggio, data noleggio, data restituzione, e titolo del film.
-    r.rental_id,
+---
+-- Query 2: Mostra tutti i noleggi effettuati da un cliente di nome Mary Smith, inclusi l'ID noleggio, le date di noleggio e restituzione, e il titolo del film.
+SELECT r.rental_id,
     r.rental_date,
     r.return_date,
     f.title AS film_title
@@ -15,6 +17,8 @@ FROM rental r
 WHERE c.first_name = 'MARY'
     AND c.last_name = 'SMITH'
 ORDER BY r.rental_date ASC;
+---
+-- Query 3: Per ogni film, mostra il numero totale di volte in cui è stato noleggiato.
 SELECT f.title AS film_title,
     COUNT(r.rental_id) AS total_rentals
 FROM film f
@@ -23,6 +27,8 @@ FROM film f
 GROUP BY f.title
 ORDER BY total_rentals DESC,
     f.title ASC;
+---
+-- Query 4: Elenca i nomi dei film che non sono mai stati noleggiati.
 SELECT f.title AS film_title
 FROM film f
     LEFT JOIN inventory i ON f.film_id = i.film_id
@@ -30,6 +36,8 @@ FROM film f
 WHERE r.rental_id IS NULL
 GROUP BY f.title
 ORDER BY f.title ASC;
+---
+-- Query 5: Trova il genere (category) con il maggior numero di noleggi.
 SELECT c.name AS category_name,
     COUNT(r.rental_id) AS total_rentals
 FROM category c
